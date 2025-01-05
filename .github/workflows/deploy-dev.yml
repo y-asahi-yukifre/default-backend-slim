@@ -1,0 +1,29 @@
+on:
+    push:
+      branches:
+        - dev
+  
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+      
+    - name: composer install
+      run: composer install --no-dev
+      
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.ftp_server_dev }}
+        username: ${{ secrets.ftp_username_dev }}
+        password: ${{ secrets.ftp_password_dev }}
+        server-dir: ${{ secrets.ftp_server_dir_dev }}myapp/ #change here to the project root folder in the server
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/logs/**
+          **/tests/**
