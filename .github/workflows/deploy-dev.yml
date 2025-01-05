@@ -27,3 +27,4 @@ jobs:
           **/.git*/**
           **/logs/**
           **/tests/**
+          **/.vscode/**
