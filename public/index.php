@@ -49,7 +49,7 @@ $app->setBasePath((function () {
 	if ($scriptDir !== '/' && stripos($uri, $scriptDir) === 0) {
 		return $scriptDir;
 	}
-	return '';
+	return substr($uri, 0, -1);
 })());
 
 // Register middleware
